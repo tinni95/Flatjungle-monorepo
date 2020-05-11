@@ -1,4 +1,4 @@
-export default () =>  [
+export const universities =  [
 "University of Aberdeen",
 "Abertay University",
 "Aberystwyth University",
