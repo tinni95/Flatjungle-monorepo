@@ -8,6 +8,9 @@ const notes = gql`
 {
   notes{
     title
+    pdf{
+      url
+    }
   }
 }
 `;
@@ -22,7 +25,7 @@ export default () => {
       <PageHeader></PageHeader>
         {data.notes.map(note=>{
      {       console.log(note.title)}
-           return <p>{note.title}</p>
+           return <p>{note.pdf.url}</p>
         })}
     </Layout>
   );
