@@ -4,7 +4,7 @@
 background-image: url('/images/cover.jpg');
 background-size:cover;
 height:500px;
-box-shadow:inset 0 0 0 2000px rgba(3, 9, 20, 0.493);
+box-shadow:inset 0 0 0 2000px rgba(241, 244, 250, 0.589);
 }
 
 .heading{

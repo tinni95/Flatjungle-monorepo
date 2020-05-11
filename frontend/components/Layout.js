@@ -2,9 +2,7 @@
 
 import React from "react";
 import Head from "next/head";
-import Link from "next/link";
-
-import { Container, Nav, NavItem } from "reactstrap";
+import Navbar from "./NavBar";
 
 class Layout extends React.Component {
   constructor(props) {
@@ -45,25 +43,7 @@ class Layout extends React.Component {
               }
             `}
           </style>
-          <Nav className="navbar navbar-dark bg-dark">
-            <NavItem>
-              <Link href="/">
-                <a className="navbar-brand">Home</a>
-              </Link>
-            </NavItem>
-
-            <NavItem className="ml-auto">
-              <Link href="/signin">
-                <a className="nav-link">Sign In</a>
-              </Link>
-            </NavItem>
-
-            <NavItem>
-              <Link href="/signup">
-                <a className="nav-link"> Sign Up</a>
-              </Link>
-            </NavItem>
-          </Nav>
+            <Navbar></Navbar>
         </header>
             {children}
       </div>

@@ -4,7 +4,7 @@ import App, { Container } from "next/app";
 import Head from "next/head";
 import client from "../components/apollo";
 import { ApolloProvider } from '@apollo/react-hooks';
-
+import CssBaseline from '@material-ui/core/CssBaseline';
 class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
     let pageProps = {};
@@ -19,6 +19,7 @@ class MyApp extends App {
     const { Component, pageProps } = this.props;
     return (
       <ApolloProvider client={client}>
+        <CssBaseline/>
         <Head>
           <link
             rel="stylesheet"
