@@ -49,6 +49,8 @@ class SignUp extends React.Component {
 
   render() {
     const { error } = this.state;
+    console.log(error)
+    if(error)return null
     return (
       <Layout>
       <Container>
@@ -59,7 +61,7 @@ class SignUp extends React.Component {
                 <img src="https://strapi.io/assets/images/logo.png" />
               </div>
               <section className="wrapper">
-                <div className="notification">{error}</div>
+                {error &&<Alert severity="error" title="errore" text={error}></Alert>}
                 <Form>
                   <FormGroup>
                     <Label>Username:</Label>

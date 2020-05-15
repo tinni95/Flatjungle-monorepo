@@ -10,6 +10,9 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { useRouter } from 'next/router'
+import Cookies from "js-cookie";
+import { useEffect } from 'react';
+import { unsetToken } from '../lib/auth';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,6 +33,7 @@ export default function MenuAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
+
   const handleSignup = e => {
     e.preventDefault()
     router.push("/signup")
@@ -38,6 +42,18 @@ export default function MenuAppBar() {
   const handleLogin = e => {
     e.preventDefault()
     router.push("/signin")
+  }
+
+  const handleSignOut = e => {
+    unsetToken();
+    e.preventDefault()
+    router.push("/")
+  }
+
+  const handleProfile = e => {
+    unsetToken();
+    e.preventDefault()
+    router.push("/profile")
   }
 
   const handleHome = e => {
@@ -89,8 +105,18 @@ export default function MenuAppBar() {
                 open={open}
                 onClose={handleClose}
               >
+              
+                { !Cookies.get("jwt")?
+                <>
                 <MenuItem onClick={handleLogin}>Log In</MenuItem>
                 <MenuItem onClick={handleSignup}>Sign up</MenuItem>
+                </>
+                :
+                <>
+                <MenuItem onClick={handleProfile}>Profile</MenuItem>
+                <MenuItem onClick={handleSignOut}>Sign out</MenuItem>
+                </>
+                }
               </Menu>
             </div>
           )}
