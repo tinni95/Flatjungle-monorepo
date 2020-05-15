@@ -61,7 +61,7 @@ export default function MenuAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Home
+            {router.pathname}
           </Typography>
           {auth && (
             <div>

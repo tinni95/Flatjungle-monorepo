@@ -2,7 +2,7 @@
 import React from "react";
 import App, { Container } from "next/app";
 import Head from "next/head";
-import client from "../components/apollo";
+import client from "../lib/apollo";
 import { ApolloProvider } from '@apollo/react-hooks';
 
 class MyApp extends App {
