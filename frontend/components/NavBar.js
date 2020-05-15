@@ -51,7 +51,6 @@ export default function MenuAppBar() {
   }
 
   const handleProfile = e => {
-    unsetToken();
     e.preventDefault()
     router.push("/profile")
   }
@@ -69,6 +68,20 @@ export default function MenuAppBar() {
     setAnchorEl(null);
   };
 
+  const menuItems = () => {
+    if(Cookies.get("jwt")){
+    return [
+    <MenuItem key={1} onClick={handleProfile}>Profile</MenuItem>,
+    <MenuItem key={2} onClick={handleSignOut}>Sign out</MenuItem>
+    ]
+    }
+    else{
+      return [
+    <MenuItem key={1} onClick={handleLogin}>Log In</MenuItem>,
+    <MenuItem key={2} onClick={handleSignup}>Sign up</MenuItem>
+      ]
+    }
+  }
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -105,18 +118,7 @@ export default function MenuAppBar() {
                 open={open}
                 onClose={handleClose}
               >
-              
-                { !Cookies.get("jwt")?
-                <>
-                <MenuItem onClick={handleLogin}>Log In</MenuItem>
-                <MenuItem onClick={handleSignup}>Sign up</MenuItem>
-                </>
-                :
-                <>
-                <MenuItem onClick={handleProfile}>Profile</MenuItem>
-                <MenuItem onClick={handleSignOut}>Sign out</MenuItem>
-                </>
-                }
+              {menuItems()}
               </Menu>
             </div>
           )}

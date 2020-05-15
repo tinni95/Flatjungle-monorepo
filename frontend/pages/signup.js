@@ -44,13 +44,11 @@ class SignUp extends React.Component {
 
     strapiRegister(username, email, password)
       .then(() => this.setState({ loading: false }))
-      .catch(error => this.setState({ error: error }));
+      .catch(error =>    console.log("error"));
   }
 
   render() {
     const { error } = this.state;
-    console.log(error)
-    if(error)return null
     return (
       <Layout>
       <Container>

@@ -3,20 +3,36 @@
 import jwtDecode from "jwt-decode";
 import Cookies from "js-cookie";
 import Strapi from "strapi-sdk-javascript/build/main";
-
+import axios from 'axios';
 import Router from "next/router";
 
 const apiUrl = process.env.API_URL || "http://localhost:1337";
 const strapi = new Strapi(apiUrl);
 
-export const strapiRegister = (username, email, password) => {
+export const strapiRegister =  async (username, email, password) => {
   if (!process.browser) {
     return undefined;
   }
-  strapi.register(username, email, password).then(res => {
-    setToken(res);
+  axios
+  .post('http://localhost:1337/auth/local/register', {
+    username,
+    email,
+    password,
+  })
+  .then(response => {
+    // Handle success.
+    console.log('Well done!');
+    console.log('User profile', response.data.user);
+    console.log('User token', response.data.jwt);
+    setToken(response.data.jwt)
+    return response.data.jwt
+  })
+  .catch(error => {
+    // Handle error.
+    console.log('An error occurred:', error);
+    return error
   });
-  return Promise.resolve();
+
 };
 //use strapi to get a JWT and token object, save
 //to approriate cookei for future requests
@@ -35,7 +51,6 @@ export const setToken = token => {
   if (!process.browser) {
     return;
   }
-  Cookies.set("username", token.user.username);
   Cookies.set("jwt", token.jwt);
   
   if (Cookies.get("username")) {
@@ -49,7 +64,6 @@ export const unsetToken = () => {
   }
   Cookies.remove("jwt");
   Cookies.remove("username");
-  Cookies.remove("cart");
 
   // to support logging out from all windows
   window.localStorage.setItem("logout", Date.now());
