@@ -14,6 +14,22 @@ type createRolePayload {
   role: UsersPermissionsRole
 }
 
+input createUniInput {
+  data: UniInput
+}
+
+type createUniPayload {
+  uni: Uni
+}
+
+input createUniversitiesInput {
+  data: UniversitiesInput
+}
+
+type createUniversitiesPayload {
+  university: Universities
+}
+
 input createUserInput {
   data: UserInput
 }
@@ -41,6 +57,22 @@ input deleteRoleInput {
 
 type deleteRolePayload {
   role: UsersPermissionsRole
+}
+
+input deleteUniInput {
+  where: InputID
+}
+
+type deleteUniPayload {
+  uni: Uni
+}
+
+input deleteUniversitiesInput {
+  where: InputID
+}
+
+type deleteUniversitiesPayload {
+  university: Universities
 }
 
 input deleteUserInput {
@@ -77,6 +109,15 @@ input editRoleInput {
   type: String
   permissions: [ID]
   users: [ID]
+}
+
+input editUniInput {
+  title: String
+}
+
+input editUniversitiesInput {
+  Title: String
+  image: ID
 }
 
 input editUserInput {
@@ -116,12 +157,18 @@ scalar JSON
 """The `Long` scalar type represents 52-bit integers"""
 scalar Long
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Notes | createNotesPayload | updateNotesPayload | deleteNotesPayload | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Notes | createNotesPayload | updateNotesPayload | deleteNotesPayload | Uni | createUniPayload | updateUniPayload | deleteUniPayload | Universities | createUniversitiesPayload | updateUniversitiesPayload | deleteUniversitiesPayload | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload
 
 type Mutation {
   createNotes(input: createNotesInput): createNotesPayload
   updateNotes(input: updateNotesInput): updateNotesPayload
   deleteNotes(input: deleteNotesInput): deleteNotesPayload
+  createUni(input: createUniInput): createUniPayload
+  updateUni(input: updateUniInput): updateUniPayload
+  deleteUni(input: deleteUniInput): deleteUniPayload
+  createUniversities(input: createUniversitiesInput): createUniversitiesPayload
+  updateUniversities(input: updateUniversitiesInput): updateUniversitiesPayload
+  deleteUniversities(input: deleteUniversitiesInput): deleteUniversitiesPayload
 
   """Create a new role"""
   createRole(input: createRoleInput): createRolePayload
@@ -163,6 +210,10 @@ input NotesInput {
 type Query {
   note(id: ID!): Notes
   notes(sort: String, limit: Int, start: Int, where: JSON): [Notes]
+  uni(id: ID!): Uni
+  unis(sort: String, limit: Int, start: Int, where: JSON): [Uni]
+  university(id: ID!): Universities
+  universities(sort: String, limit: Int, start: Int, where: JSON): [Universities]
   files(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
   role(id: ID!): UsersPermissionsRole
 
@@ -183,6 +234,30 @@ input RoleInput {
   users: [ID]
 }
 
+type Uni {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  title: String
+}
+
+input UniInput {
+  title: String
+}
+
+type Universities {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  Title: String
+  image: UploadFile
+}
+
+input UniversitiesInput {
+  Title: String
+  image: ID
+}
+
 input updateNotesInput {
   where: InputID
   data: editNotesInput
@@ -199,6 +274,24 @@ input updateRoleInput {
 
 type updateRolePayload {
   role: UsersPermissionsRole
+}
+
+input updateUniInput {
+  where: InputID
+  data: editUniInput
+}
+
+type updateUniPayload {
+  uni: Uni
+}
+
+input updateUniversitiesInput {
+  where: InputID
+  data: editUniversitiesInput
+}
+
+type updateUniversitiesPayload {
+  university: Universities
 }
 
 input updateUserInput {

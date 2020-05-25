@@ -49,7 +49,7 @@ class SignIn extends React.Component {
 
     this.setState({ loading: true });
 
-    strapiLogin(email, password).then(() => console.log(Cookies.get("user")));
+    strapiLogin(email, password).then((e) => console.log(e)).catch(e => console.log(e))
   }
   render() {
     const { error } = this.state;

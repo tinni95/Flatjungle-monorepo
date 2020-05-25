@@ -1,4 +1,4 @@
-import styles from './PageHeader.module.css'
+
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -16,7 +16,7 @@ const unis = gql`
 }
 `;
 
-export default function PageHeader () {
+export default function PageHeaderUni ({imgSrc}) {
 const { loading, error, data } = useQuery(unis);
 const router = useRouter();
 
@@ -27,8 +27,11 @@ const handleClick = (e,val) => {
   e.preventDefault()
   router.push("/uni/"+val.id)
 }
-
-return <div className={styles.header}>
+const bg="http://localhost:1337/"+imgSrc;
+console.log(bg)
+return <div style={{backgroundImage:'url('+bg+')',
+backgroundSize:"cover",height:"500px",
+boxShadow:"inset 0 0 0 2000px rgba(241, 244, 250, 0.589)"}}>
     <Container maxWidth="sm">
     <Autocomplete
         freeSolo

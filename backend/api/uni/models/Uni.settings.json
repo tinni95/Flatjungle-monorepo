@@ -1,0 +1,18 @@
+{
+  "connection": "default",
+  "collectionName": "unis",
+  "info": {
+    "name": "uni",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    }
+  }
+}

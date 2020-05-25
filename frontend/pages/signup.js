@@ -2,8 +2,8 @@
 
 import React from "react";
 import { strapiRegister } from "../lib/auth";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-import Router from "next/router";
 import {
   Container,
   Row,
@@ -12,8 +12,7 @@ import {
   Form,
   FormGroup,
   Label,
-  Input,
-  FormText
+  Input
 } from "reactstrap";
 import Layout from "../components/Layout";
 
@@ -43,12 +42,18 @@ class SignUp extends React.Component {
     this.setState({ loading: true });
 
     strapiRegister(username, email, password)
-      .then(() => this.setState({ loading: false }))
-      .catch(error =>    console.log("error"));
+      .then((res) => console.log(res))
   }
 
   render() {
-    const { error } = this.state;
+    const { error,loading } = this.state;
+    if(error){
+      console.log("error",error)
+      return <Layout>
+        <CircularProgress/>
+      </Layout>
+    }
+    else{
     return (
       <Layout>
       <Container>
@@ -142,6 +147,7 @@ class SignUp extends React.Component {
       </Container>
       </Layout>
     );
+          }
   }
 }
 export default SignUp;

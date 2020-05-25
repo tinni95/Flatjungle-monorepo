@@ -5,10 +5,10 @@ import { gql } from 'apollo-boost';
 const notes = gql`
 {
   notes{
-    title
-    pdf{
-      url
-    }
+      title
+      pdf{
+        url
+      }
   }
 }
 `;

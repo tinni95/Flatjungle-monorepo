@@ -9,7 +9,7 @@ import Router from "next/router";
 const apiUrl = process.env.API_URL || "http://localhost:1337";
 const strapi = new Strapi(apiUrl);
 
-export const strapiRegister =  async (username, email, password) => {
+export async function strapiRegister(username, email, password){
   if (!process.browser) {
     return undefined;
   }
@@ -29,22 +29,35 @@ export const strapiRegister =  async (username, email, password) => {
   })
   .catch(error => {
     // Handle error.
-    console.log('An error occurred:', error);
+    console.log(error);
     return error
   });
-
 };
 //use strapi to get a JWT and token object, save
 //to approriate cookei for future requests
-export const strapiLogin = (email, password) => {
+export async function strapiLogin (email, password){
   if (!process.browser) {
     return;
   }
   // Get a token
-  strapi.login(email, password).then(res => {
-    setToken(res);
+  axios
+  .post('http://localhost:1337/auth/local', {
+    identifier:email,
+    password,
+  })
+  .then(response => {
+    // Handle success.
+    console.log('Well done!');
+    console.log('User profile', response.data.user);
+    console.log('User token', response.data.jwt);
+    setToken(response.data.jwt)
+    return response.data.jwt
+  })
+  .catch(error => {
+    // Handle error.
+    console.log(error);
+    return error
   });
-  return Promise.resolve();
 };
 
 export const setToken = token => {
@@ -53,7 +66,7 @@ export const setToken = token => {
   }
   Cookies.set("jwt", token.jwt);
   
-  if (Cookies.get("username")) {
+  if (Cookies.get("jwt")) {
     Router.push("/");
   }
 };

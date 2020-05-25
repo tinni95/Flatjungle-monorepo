@@ -1,0 +1,23 @@
+{
+  "connection": "default",
+  "collectionName": "universities",
+  "info": {
+    "name": "universities",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload"
+    }
+  }
+}
