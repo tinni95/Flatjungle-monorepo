@@ -1,7 +1,6 @@
 /* /pages/signin.js */ 
 import React from "react";
 import Layout from "../components/Layout";
-import defaultPage from "../hocs/defaultPage";
 import { strapiLogin } from "../lib/auth";
 
 import Router from "next/router";
@@ -14,9 +13,7 @@ import {
   FormGroup,
   Label,
   Input,
-  FormText
 } from "reactstrap";
-import Cookies from "js-cookie";
 
 class SignIn extends React.Component {
   constructor(props) {
