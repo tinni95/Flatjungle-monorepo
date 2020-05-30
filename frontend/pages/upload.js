@@ -1,12 +1,13 @@
 /* pages/index.js */
 import Layout from "../components/Layout";
-import { Button, Container, withStyles } from "@material-ui/core";
-import { useRouter } from "next/router";
+import { Button, Container } from "@material-ui/core";
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import Config from "../lib/config";
 import S3 from "../lib/digitalocean";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import Dropzone from 'react-dropzone'
+import Pdf from "../public/images/pdf.svg"
 
 export default () => {  
  const handleImageChange = (e) => {
@@ -38,6 +39,16 @@ export default () => {
     <Layout>
       <Container maxWidth="sm">
       <div className="center">
+      <Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
+        {({getRootProps, getInputProps}) => (
+          <section>
+            <div className="dropzone" {...getRootProps()}>
+              <input {...getInputProps()} />
+              <Pdf height="50"/>
+            </div>
+          </section>
+        )}
+      </Dropzone>
       <Formik
       initialValues={{ course: "" }}
       onSubmit={async values => {
@@ -100,7 +111,6 @@ export default () => {
                   : "text-input"
               }
             />
-            
             <button type="submit" disabled={isSubmitting}>
               Submit
             </button>
@@ -124,6 +134,12 @@ export default () => {
       </Container>
       <style jsx>
           {`
+            .dropzone{
+              background-color:lightblue;
+              height:10rem;
+              display: flex;
+              justify-content: center;
+            }
             .center{
               text-align: center;
               margin:10px;
