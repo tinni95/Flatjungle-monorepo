@@ -36,14 +36,18 @@ export default () => {
     <Layout>
       <div className="center">
       <Button
-        variant="contained"
-        color="default"
-        startIcon={<CloudUploadIcon />}
+      variant="contained"
+      component="label"
+      startIcon={<CloudUploadIcon />}
       >
-        Upload
-        <input type="file" id="inputfile" accept="pdf/*"
-            onChange={handleImageChange} />
-      </Button>
+      Upload File
+  <input
+    type="file"
+    style={{ display: "none" }}
+    onChange={handleImageChange}
+  />
+</Button>
+
  
       </div>
       <style jsx>
