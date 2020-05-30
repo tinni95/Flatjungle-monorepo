@@ -2,7 +2,7 @@
 import React from "react";
 import Layout from "../components/Layout";
 import { strapiLogin } from "../lib/auth";
-
+import ButtonStyled from "../components/ButtonStyled"
 import Router from "next/router";
 import {
   Container,
@@ -87,13 +87,13 @@ class SignIn extends React.Component {
                         <small>Forgot Password?</small>
                       </a>
                     </span>
-                    <Button
+                    <ButtonStyled
                       style={{ float: "right", width: 120 }}
                       color="primary"
                       onClick={this.onSubmit.bind(this)}
                     >
                       Submit
-                    </Button>
+                    </ButtonStyled>
                   </FormGroup>
                 </Form>
               </section>
