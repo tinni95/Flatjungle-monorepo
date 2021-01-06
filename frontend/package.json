@@ -11,7 +11,7 @@
     "@material-ui/lab": "^4.0.0-alpha.52",
     "@svgr/webpack": "^5.4.0",
     "apollo-boost": "^0.4.8",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bootstrap": "^4.4.1",
     "cross-fetch": "^3.0.4",
     "formik": "^2.1.4",
